@@ -1,7 +1,8 @@
 from typing import Dict
 import requests
+from .interfaces.http_requester import HttpRequesterInterface
 
-class HttpRequester:
+class HttpRequester(HttpRequesterInterface):
     
     def __init__(self) -> None:
         self.__url = 'https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY'
