@@ -1,8 +1,8 @@
-from abc import ABC, abstractclassmethod
+from abc import ABC, abstractmethod
 from typing import Dict
 
 class HttpRequesterInterface(ABC):
-    
-    @abstractclassmethod
+   
+    @abstractmethod
     def request_from_page(self) -> Dict[int, str]:
         pass

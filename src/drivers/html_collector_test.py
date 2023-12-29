@@ -16,4 +16,5 @@ def test_request_from_page():
 
 # Imprime a informação essencial
     print(essential_information)
+    
 

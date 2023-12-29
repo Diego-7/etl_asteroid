@@ -11,34 +11,29 @@ class HtmlCollector(HtmlCollectorInterface):
         # Cria uma lista vazia para armazenar as informações essenciais
         essential_info = []
         
-        # Busca todos os elementos que tenham a classe 'token-property'
-        asteroid_names = soup.find_all(class_='token-property')
-        amhs = soup.find_all(class_='token-property')
-        iphas = soup.find_all(class_='token-property')
-        orbitingBodies = soup.find_all(class_='token-property')
-        isos = soup.find_all(class_='token-property')
+        # Busca todos os elementos que contêm as informações dos asteróides
+        asteroids = soup.find_all(class_ = 'token-property')
         
         # Percorre os elementos encontrados
-        for asteroid_name_element, amh_element, ipha_element, orbitingBody_element, iso_element in zip(asteroid_names, amhs, iphas, orbitingBodies, isos):
-            # Converte os elementos em strings
-            text = str(asteroid_name_element)
-            text2 = str(amh_element)
-            text3 = str(ipha_element)
-            text4 = str(orbitingBody_element)
-            text5 = str(iso_element)
+        for asteroid in asteroids:
+            # Extrai as informações de cada elemento
+            asteroid_name = asteroid.find(attrs={'data-label': 'Name'}).text
+            absolute_magnitude = asteroid.find(attrs={'data-label': 'Absolute Magnitude'}).text
+            is_potentially_hazardous = asteroid.find(attrs={'data-label': 'Potentially Hazardous'}).text
+            orbiting_body = asteroid.find(attrs={'data-label': 'Orbiting Body'}).text
+            is_sentry_object = asteroid.find(attrs={'data-label': 'Sentry Object'}).text
             
-            # Verifica se as strings contêm as palavras desejadas
-            if "name" in text and "absolute_magnitude_h" in text2 and "is_potentially_hazardous_asteroid" in text3 and "orbiting_body" in text4 and "is_sentry_object" in text5:
-                # Cria um dicionário com as informações essenciais
-                info = {
-                    "name": text,
-                    "absolute_magnitude_h": text2,
-                    "is_potentially_hazardous_asteroid": text3,
-                    "orbiting_body": text4,
-                    "is_sentry_object": text5
-                }
-                # Adiciona o dicionário à lista de informações essenciais
-                essential_info.append(info)
+            # Cria um dicionário com as informações do asteróide
+            info = {
+                'name': asteroid_name,
+                'absolute_magnitude': absolute_magnitude,
+                'is_potentially_hazardous': is_potentially_hazardous,
+                'orbiting_body': orbiting_body,
+                'is_sentry_object': is_sentry_object
+            }
+            
+            # Adiciona o dicionário à lista essential_info
+            essential_info.append(info)
         
         # Retorna a lista de informações essenciais
         return essential_info
