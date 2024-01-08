@@ -24,17 +24,5 @@ class TransformRawData:
         transformed_information = []
         
         for data in data_content:
-            transformed_data = None
-            link = data["links"]
-            
-            if 'self' not in link: continue
-            
-            names = None
-            if ' ' in data["name"]: names = data["name"].replace([' ', '' ])
-            else: names = [data["name"]]
-            
-            transformed_data = self.__transform_data(names, link)
-            transformed_data["extration_date"] = extraction_date
-            transformed_information.append(transformed_data)            
-        
-        return transformed_data
+          pass
+        #return transformed_data
